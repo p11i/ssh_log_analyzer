@@ -28,4 +28,10 @@ func TestFilterResults(t *testing.T) {
 	if len(filteredNonExistentUser) != 0 {
 		t.Errorf("Expected 0 entries for nonexistentuser, got %d", len(filteredNonExistentUser))
 	}
+
+	// Test filtering by IP address
+	filteredIP := analysis.FilterResults(mockLogEntries, "", "192.168.1.2", time.Now().Add(-3*time.Hour))
+	if len(filteredIP) != 1 {
+		t.Errorf("Expected 1 entry for IP 192.168.1.2, got %d", len(filteredIP))
+	}
 }
