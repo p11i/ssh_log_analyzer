@@ -4,6 +4,8 @@ package main
 import (
 	"flag"
 	"log"
+	analysis "p11i/ssh_log_analyzer/analysis"
+	parsing "p11i/ssh_log_analyzer/parsing"
 	"time"
 )
 
