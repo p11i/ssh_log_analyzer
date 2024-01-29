@@ -22,4 +22,10 @@ func TestFilterResults(t *testing.T) {
 	if len(filteredUser) != 2 {
 		t.Errorf("Expected 2 entries for user1, got %d", len(filteredUser))
 	}
+
+	// Test filtering by non-existent username
+	filteredNonExistentUser := analysis.FilterResults(mockLogEntries, "nonexistentuser", "", time.Now().Add(-3*time.Hour))
+	if len(filteredNonExistentUser) != 0 {
+		t.Errorf("Expected 0 entries for nonexistentuser, got %d", len(filteredNonExistentUser))
+	}
 }
