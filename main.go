@@ -20,4 +20,10 @@ func main() {
 	if err != nil {
 		log.Fatal("Error parsing logs:", err)
 	}
+
+	// Filter results
+	logEntries = analysis.FilterResults(logEntries, *filterUser, *filterIP, time.Now().Add(-*timeRange))
+
+	// Analyze and print summary
+	analysis.PrintSummary(logEntries)
 }
