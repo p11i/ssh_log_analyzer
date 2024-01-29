@@ -3,6 +3,7 @@ package main
 
 import (
 	"flag"
+	"log"
 	"time"
 )
 
@@ -13,4 +14,10 @@ func main() {
 	filterIP := flag.String("ip", "", "Filter results by IP address")
 	timeRange := flag.Duration("time", 24*time.Hour, "Time range for analysis (e.g., 1h, 24h)")
 	flag.Parse()
+
+	// Parse SSH logs
+	logEntries, err := parsing.ParseSSHLogs(*logFile)
+	if err != nil {
+		log.Fatal("Error parsing logs:", err)
+	}
 }
