@@ -1,6 +1,12 @@
 # SSH Log Analyzer
 
 This is a simple Go-based project for parsing and analyzing SSH logs to identify and analyze failed login attempts. The project includes features like time-based analysis, filtering by username and IP address, and provides a summary of failed login attempts.
+## Features
+
+- Time-based analysis for a specified duration.
+- Filter results by username or IP address.
+- Simple command-line interface for ease of use.
+- Extensible and customizable for specific requirements.
 
 ## Project Structure
 
