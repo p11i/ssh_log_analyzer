@@ -2,7 +2,11 @@
 
 package analysis
 
-import "time"
+import (
+	"fmt"
+	"strings"
+	"time"
+)
 
 func FilterResults(logEntries []parsing.LogEntry, filterUser, filterIP string, timeThreshold time.Time) []parsing.LogEntry {
 	var filteredEntries []parsing.LogEntry
@@ -14,4 +18,20 @@ func FilterResults(logEntries []parsing.LogEntry, filterUser, filterIP string, t
 		}
 	}
 	return filteredEntries
+}
+
+func PrintSummary(logEntries []parsing.LogEntry) {
+	fmt.Printf("%-20s%-15s%-15s%-15s\n", "Time", "IP Address", "Username", "Attempt Type")
+	fmt.Println(strings.Repeat("-", 65))
+
+	failedAttempts := make(map[parsing.LogEntry]int)
+	for _, entry := range logEntries {
+		failedAttempts[entry]++
+	}
+
+	for attempt, count := range failedAttempts {
+		fmt.Printf("%-20s%-15s%-15s%-15s\n", attempt.Time.Format("Jan 02 15:04:05"), attempt.IPAddress, attempt.Username, attempt.AttemptType)
+	}
+
+	fmt.Println("\nTotal Failed Attempts:", len(logEntries))
 }
